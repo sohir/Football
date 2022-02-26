@@ -1,5 +1,6 @@
 package com.idbs.football.di
 
+import com.idbs.football.BuildConfig
 import com.idbs.football.network.ApiServices
 import com.idbs.football.utilit.UrlsConstants.BASE_URL
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -32,13 +33,13 @@ object NetworkingModule {
     fun provideOKHttpClient(logger: HttpLoggingInterceptor):
             OkHttpClient {
         val okHttpClient = OkHttpClient().newBuilder()
-        okHttpClient.addInterceptor(logger)
-            .addInterceptor { chain ->
-                val request: Request = chain.request().newBuilder()
-                    .addHeader("X-Auth-Token", "6d0c1627177943118d15af8b49792aed")
-                    .build()
+        okHttpClient.addInterceptor { chain ->
+                val request: Request = chain.request().newBuilder().addHeader("X-Auth-Token", "6d0c1627177943118d15af8b49792aed").build()
                 chain.proceed(request)
             }
+        if (BuildConfig.DEBUG) {
+            okHttpClient.addInterceptor(logger)
+        }
         return okHttpClient.build()
     }
 

@@ -5,6 +5,12 @@
       <map>
         <entry key="..\:/easyCach/applicaion/app/src/main/res/layout/fragment_item.xml" value="0.1" />
         <entry key="..\:/easyCach/applicaion/app/src/main/res/layout/fragment_item_list.xml" value="0.165625" />
+        <entry key="..\:/easyCach/applicaion/app/src/main/res/layout/fragment_leage_list.xml" value="0.1796875" />
+        <entry key="..\:/easyCach/applicaion/app/src/main/res/layout/fragment_team_details.xml" value="0.1" />
+        <entry key="..\:/easyCach/applicaion/app/src/main/res/layout/fragment_teams_list.xml" value="0.1796875" />
+        <entry key="..\:/easyCach/applicaion/app/src/main/res/layout/league_list_item.xml" value="0.22" />
+        <entry key="..\:/easyCach/applicaion/app/src/main/res/layout/main_activity.xml" value="0.1" />
+        <entry key="..\:/easyCach/applicaion/app/src/main/res/layout/teams_list_item.xml" value="0.22" />
       </map>
     </option>
   </component>
