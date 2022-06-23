@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">football</string>
+    <string name="title_activity_compose1">ComposeActivity1</string>
 </resources>
