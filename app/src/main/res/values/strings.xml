@@ -4,5 +4,6 @@
     <string name="text_placeholder">Hello from My Text</string>
     <string name="btn_placeholder">Click here</string>
     <string name="my_fab">My Fab</string>
+    <string name="title_activity_list_compose">ListComposeActivity</string>
 
 </resources>
