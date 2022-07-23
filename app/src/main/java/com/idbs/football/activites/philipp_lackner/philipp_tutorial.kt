@@ -8,13 +8,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,13 +29,14 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.idbs.football.R
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class philipp_tutorial : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            FootballTheme {
+         //   FootballTheme {
                 val painter = painterResource(id = R.drawable.cat)
                 val description = "Kermit playing in the show"
                 val title = "kermit is palying in the show"
@@ -61,7 +57,7 @@ class philipp_tutorial : ComponentActivity() {
                     TextStyling()
                 }*/
                 //State
-                Column(modifier = Modifier.fillMaxSize()) {
+   /*             Column(modifier = Modifier.fillMaxSize()) {
                     //   ColorBox(modifier = Modifier.fillMaxSize())
                     ColorBox2(modifier = Modifier
                         .weight(1f)
@@ -72,65 +68,65 @@ class philipp_tutorial : ComponentActivity() {
                         .background(color = color.value)
                         .weight(1f)
                         .fillMaxSize())
-                }
-            }
+                }*/
+                //Working with scaffoldState and design EditText with Snackbar
+                TextFieldAndSnackBar()
+         //   }
         }
     }
 }
 
 @Composable
-fun ImageCard(painter:Painter,
-contentDescription:String,
-title:String,
-modifier:Modifier = Modifier
-){
-    Card(modifier = modifier.fillMaxWidth(),
-    shape = RoundedCornerShape(15.dp),
-    elevation = 5.dp
-    ) {
-        Box(modifier = Modifier.height(200.dp)) {
-            Image(painter = painter,
-                contentDescription = contentDescription,
-            contentScale = ContentScale.Crop
-            )
-            //Gradient transparent and black
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        colors = listOf(Color.Transparent, Color.Black),
-                        startY = 300f
-                    )
-                ))
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .padding(12.dp),
-            contentAlignment = Alignment.BottomStart
-            ){
-                Text(text =  title, style = TextStyle(color = Color.White, fontSize = 16.sp))
-            }
-
-        }
+fun TextFieldAndSnackBar(){
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+    var textFieldState by remember {
+        mutableStateOf("")
     }
-}
 
-@Composable
-fun TextStyling(){
-    Text(text = buildAnnotatedString {
-        withStyle(style = SpanStyle(color = Color.Green,
-        fontSize = 50.sp
+    Scaffold(modifier = Modifier.fillMaxSize(),
+    scaffoldState = scaffoldState) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 30.dp)
+        ) {
+        TextField(value = textFieldState,
+            label = { Text(text = "Enter your name") },
+            onValueChange ={ textFieldState = it },
+            singleLine = true,
+            modifier = Modifier.fillMaxWidth()
         )
-        ){
-            append("J")
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(onClick = { 
+                scope.launch {
+                    scaffoldState.snackbarHostState.showSnackbar("Hello $textFieldState")
+                }
+            }) {
+                Text(text = "Pls grat me")
+            }
+
         }
-        append("etpack ")
-    },
-        color = Color.White,
-        fontSize = 30.sp,
-        fontStyle = FontStyle.Italic,
-        textAlign = TextAlign.Center,
-        textDecoration = TextDecoration.Underline
-        //fontFamily = fontFamily
+    }
+}
+@Composable
+fun ColorBox2(modifier: Modifier,
+updateColor: (Color) -> Unit ){
+    //This fun for State concept
+
+    Box(modifier = modifier
+        .background(Color.Red)
+        .clickable {
+            updateColor(
+                Color(
+                    Random.nextFloat(),
+                    Random.nextFloat(),
+                    Random.nextFloat(), 1f
+                )
+            )
+        }
     )
 }
 
@@ -153,23 +149,62 @@ fun ColorBox(modifier: Modifier){
 }
 
 @Composable
-fun ColorBox2(modifier: Modifier,
-updateColor: (Color) -> Unit ){
-    //This fun for State concept
-
-    Box(modifier = modifier
-        .background(Color.Red)
-        .clickable {
-            updateColor (
-                Color(
-                Random.nextFloat(),
-                Random.nextFloat(),
-                Random.nextFloat(), 1f
-            )
-            )
+fun TextStyling(){
+    Text(text = buildAnnotatedString {
+        withStyle(style = SpanStyle(color = Color.Green,
+            fontSize = 50.sp
+        )
+        ){
+            append("J")
         }
+        append("etpack ")
+    },
+        color = Color.White,
+        fontSize = 30.sp,
+        fontStyle = FontStyle.Italic,
+        textAlign = TextAlign.Center,
+        textDecoration = TextDecoration.Underline
+        //fontFamily = fontFamily
     )
 }
+
+@Composable
+fun ImageCard(painter:Painter,
+              contentDescription:String,
+              title:String,
+              modifier:Modifier = Modifier
+){
+    Card(modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(15.dp),
+        elevation = 5.dp
+    ) {
+        Box(modifier = Modifier.height(200.dp)) {
+            Image(painter = painter,
+                contentDescription = contentDescription,
+                contentScale = ContentScale.Crop
+            )
+            //Gradient transparent and black
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(Color.Transparent, Color.Black),
+                        startY = 300f
+                    )
+                ))
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp),
+                contentAlignment = Alignment.BottomStart
+            ){
+                Text(text =  title, style = TextStyle(color = Color.White, fontSize = 16.sp))
+            }
+
+        }
+    }
+}
+
+
 
 @Preview(showBackground = true)
 @Composable
