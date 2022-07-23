@@ -21,7 +21,13 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.idbs.football.R
@@ -34,17 +40,16 @@ class philipp_tutorial : ComponentActivity() {
                 val painter = painterResource(id = R.drawable.cat)
                 val description = "Kermit playing in the show"
                 val title = "kermit is palying in the show"
-                Box(modifier = Modifier
+          /*      Box(modifier = Modifier
                     .fillMaxWidth(.5f)
                     .padding(16.dp)){
                     ImageCard(painter = painter, contentDescription = description, title = title)
 
+                }*/
+                Box(modifier = Modifier.background(Color.Black).fillMaxSize()){
+                    TextStyling()
                 }
 
-                // A surface container using the 'background' color from the theme
-            /*    Surface(color = MaterialTheme.colors.background) {
-                    
-                }*/
             }
         }
     }
@@ -66,10 +71,14 @@ modifier:Modifier = Modifier
             contentScale = ContentScale.Crop
             )
             //Gradient transparent and black
-            Box(modifier = Modifier.fillMaxSize()
+            Box(modifier = Modifier
+                .fillMaxSize()
                 .background(
-                    Brush.verticalGradient(colors = listOf(Color.Transparent, Color.Black),
-                    startY = 300f)))
+                    Brush.verticalGradient(
+                        colors = listOf(Color.Transparent, Color.Black),
+                        startY = 300f
+                    )
+                ))
             Box(modifier = Modifier
                 .fillMaxSize()
                 .padding(12.dp),
@@ -80,6 +89,26 @@ modifier:Modifier = Modifier
 
         }
     }
+}
+
+@Composable
+fun TextStyling(){
+    Text(text = buildAnnotatedString {
+        withStyle(style = SpanStyle(color = Color.Green,
+        fontSize = 50.sp
+        )
+        ){
+            append("J")
+        }
+        append("etpack ")
+    },
+        color = Color.White,
+        fontSize = 30.sp,
+        fontStyle = FontStyle.Italic,
+        textAlign = TextAlign.Center,
+        textDecoration = TextDecoration.Underline
+        //fontFamily = fontFamily
+    )
 }
 
 
