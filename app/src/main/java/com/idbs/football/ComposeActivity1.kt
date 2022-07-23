@@ -225,7 +225,8 @@ fun MyColumn(
     verticalArrangement = Arrangement.SpaceEvenly,
     horizontalAlignment = Alignment.Start) {
         Button(onClick = {
-           context.startActivity(Intent(context, philipp_tutorial::class.java))
+          // context.startActivity(Intent(context, philipp_tutorial::class.java))
+            context.startActivity(Intent(context, ListComposeActivity::class.java))
 
         }) {
             Text(text = "Click", color = colorResource(id = R.color.teal_700))
