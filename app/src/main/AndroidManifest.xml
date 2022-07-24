@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Football">
         <activity
+            android:name=".activites.philipp_lackner.AnimmationssAtivity"
+            android:exported="false"
+            android:label="@string/title_activity_animmationss_ativity"
+            android:theme="@style/Theme.Football.NoActionBar" />
+        <activity
             android:name=".activites.philipp_lackner.philipp_tutorial"
             android:exported="false"
             android:label="@string/title_activity_philipp_tutorial"

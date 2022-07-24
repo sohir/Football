@@ -27,6 +27,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.idbs.football.activites.philipp_lackner.AnimmationssAtivity
 import com.idbs.football.activites.philipp_lackner.philipp_tutorial
 import com.idbs.football.ui.theme.FootballTheme
 import kotlinx.coroutines.CoroutineScope
@@ -225,8 +226,10 @@ fun MyColumn(
     verticalArrangement = Arrangement.SpaceEvenly,
     horizontalAlignment = Alignment.Start) {
         Button(onClick = {
-          // context.startActivity(Intent(context, philipp_tutorial::class.java))
-            context.startActivity(Intent(context, ListComposeActivity::class.java))
+            context.startActivity(Intent(context, AnimmationssAtivity::class.java))
+
+            // context.startActivity(Intent(context, philipp_tutorial::class.java))
+         //   context.startActivity(Intent(context, ListComposeActivity::class.java))
 
         }) {
             Text(text = "Click", color = colorResource(id = R.color.teal_700))
