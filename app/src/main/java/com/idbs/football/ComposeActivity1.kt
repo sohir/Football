@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -29,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.idbs.football.activites.philipp_lackner.AnimmationssAtivity
-import com.idbs.football.activites.philipp_lackner.philipp_tutorial
+import com.idbs.football.activites.philipp_lackner.MediationUIActivity
 import com.idbs.football.ui.theme.FootballTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -233,8 +232,16 @@ fun MyColumn(
             // context.startActivity(Intent(context, philipp_tutorial::class.java))
          //   context.startActivity(Intent(context, ListComposeActivity::class.java))
 
-        }) {
+        })
+        {
             Text(text = "Click", color = colorResource(id = R.color.teal_700))
+
+        }
+        Button(onClick = {
+            context.startActivity(Intent(context, MediationUIActivity::class.java))
+        })
+        {
+            Text(text = "Open New Screen", color = colorResource(id = R.color.teal_700))
 
         }
         Text(text = "One", fontSize = 22.sp, style = TextStyle(background = Color.Yellow),)

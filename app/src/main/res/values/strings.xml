@@ -7,5 +7,6 @@
     <string name="title_activity_list_compose">ListComposeActivity</string>
     <string name="title_activity_philipp_tutorial">philipp_tutorial</string>
     <string name="title_activity_animmationss_ativity">AnimmationssAtivity</string>
+    <string name="title_activity_modivation_uiactivity">ModivationUIActivity</string>
 
 </resources>

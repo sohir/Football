@@ -53,11 +53,10 @@ class AnimmationssAtivity : ComponentActivity() {
             FootballTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-             /*       Box(contentAlignment = Alignment.Center,
+                    Box(contentAlignment = Alignment.Center,
                         modifier = Modifier.fillMaxSize()){
                         CircularProgressBar(percentage = 0.8f, number = 100 )
-                    }*/
-
+                    }
                     Box(modifier = Modifier
                         .fillMaxSize()
                         .background(Color(0xFF101010))
