@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -216,6 +217,7 @@ fun RowScope.MyRow(){
     Text(text = "Three", modifier = Modifier.weight(1f), style = TextStyle(background = Color.Yellow))
 
 }
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun MyColumn(
 
