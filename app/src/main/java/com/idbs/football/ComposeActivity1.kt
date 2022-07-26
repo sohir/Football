@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -33,7 +34,7 @@ import com.idbs.football.ui.theme.FootballTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
+@ExperimentalFoundationApi
 class ComposeActivity1 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -216,6 +217,7 @@ fun RowScope.MyRow(){
     Text(text = "Three", modifier = Modifier.weight(1f), style = TextStyle(background = Color.Yellow))
 
 }
+@ExperimentalFoundationApi
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun MyColumn(
@@ -253,6 +255,7 @@ fun MyColumn(
 fun navigation(){
 
 }
+@ExperimentalFoundationApi
 @Composable
 fun MySurface(modifier: Modifier){
     Surface(modifier = Modifier.size(200.dp),
@@ -264,6 +267,7 @@ fun MySurface(modifier: Modifier){
     }
 }
 
+@ExperimentalFoundationApi
 @Composable
 fun MyScaffold(){
     val scaffoldState:ScaffoldState = rememberScaffoldState()
