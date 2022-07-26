@@ -7,27 +7,27 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -52,8 +52,24 @@ class AnimmationssAtivity : ComponentActivity() {
         setContent {
             FootballTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Box(contentAlignment = Alignment.Center,
+                Surface(color = Color.DarkGray,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+
+                //3d dropdown animation
+                    DropDown(text = "Hello World!",
+
+                    modifier = Modifier.fillMaxSize()
+                        .padding(10.dp)
+                    ) {
+                       Text(text = "This is now revealed!", Modifier
+                           .fillMaxWidth()
+                           .height(100.dp)
+                           .background(Color.Green))
+                    }
+
+                //Animations part1
+                /*            Box(contentAlignment = Alignment.Center,
                         modifier = Modifier.fillMaxSize()){
                         CircularProgressBar(percentage = 0.8f, number = 100 )
                     }
@@ -76,13 +92,14 @@ class AnimmationssAtivity : ComponentActivity() {
                              valume = it
                          }
                          Spacer(modifier = Modifier.width(20.dp))
-                         ValumeBar(modifier = Modifier.fillMaxWidth()
+                         ValumeBar(modifier = Modifier
+                             .fillMaxWidth()
                              .height(30.dp),
                              activeBars = (barCount * valume).roundToInt(),
                              barCount = barCount
                          )
                      }
-                    }
+                    }*/
                 }
             }
         }
@@ -91,6 +108,58 @@ class AnimmationssAtivity : ComponentActivity() {
 
 
 
+
+
+//3D animated dropdown
+@Composable
+fun DropDown(
+    text:String,
+    modifier: Modifier = Modifier,
+    initiallyOpened:Boolean = false,
+    content: @Composable () -> Unit
+){
+    var isOpen by remember{
+        mutableStateOf(initiallyOpened)
+    }
+    //The Content card animation controls (alpha, rotatex)
+    val alpha = animateFloatAsState(
+        targetValue = if (isOpen) 1f else 0f,
+        animationSpec = tween(durationMillis = 300)
+    )
+    val rotateX = animateFloatAsState(
+        targetValue = if (isOpen) 0f else -90f,
+        animationSpec = tween(durationMillis = 300)
+    )
+    Column(modifier = modifier.fillMaxWidth()) {
+        Row(horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth())
+        {
+            Text(text = text,color = Color.White, fontSize = 16.sp)
+            Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = "open or close",
+            tint = Color.White, modifier = Modifier
+                    .clickable { isOpen = !isOpen }
+                    .scale(1f, if (isOpen) -1f else 1f)
+
+            )
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+        Box(contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .graphicsLayer {
+                    transformOrigin = TransformOrigin(0.5f, 0f)
+                    rotationX = rotateX.value
+                }
+                .alpha(alpha.value)
+        ){
+            content()
+        }
+    }
+}
+
+//--------------------------//
 //Draggable music knob
 @Composable
 fun ValumeBar(
