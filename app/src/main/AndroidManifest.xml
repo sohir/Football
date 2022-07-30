@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Football">
         <activity
+            android:name=".activites.philipp_lackner.ListWithMultiSelection"
+            android:exported="false"
+            android:label="@string/title_activity_list_with_multi_selection"
+            android:theme="@style/Theme.Football.NoActionBar" />
+        <activity
             android:name=".activites.philipp_lackner.MediationUIActivity"
             android:exported="false"
             android:label="@string/title_activity_modivation_uiactivity"
